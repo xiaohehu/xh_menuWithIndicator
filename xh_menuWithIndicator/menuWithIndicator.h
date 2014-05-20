@@ -26,12 +26,17 @@
 
 
 @protocol indicatorMenuDataSource <NSObject>
-
+//-(NSInteger) numberOfLevels;
 -(NSInteger) numberOfMenuItems;
 @optional
 -(NSString *) titleOfButtonsAtIndex:(NSInteger) index;
 -(UIImage *)  imageOfButtonsAtIndex:(NSInteger) index;
 -(UIImage *)  imageOfSelectedButtonAtIndex:(NSInteger) index;
+-(UIView *) indicatorForMenu;
+//-(NSArray *) titleOfButtons;
+//-(NSArray *) imageOfButtons;
+//-(NSArray *) imageOfSelectedButton;
+//-(NSArray *) indicatorForMenu;
 @end
 
 @protocol indicatorMenuDelegate <NSObject>

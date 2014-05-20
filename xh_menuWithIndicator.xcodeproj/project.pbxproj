@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82552901192BBE9C00313D83 /* menuWithLevels.m in Sources */ = {isa = PBXBuildFile; fileRef = 82552900192BBE9C00313D83 /* menuWithLevels.m */; };
 		82C850D1192A880F0009DF17 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C850D0192A880F0009DF17 /* Foundation.framework */; };
 		82C850D3192A880F0009DF17 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C850D2192A880F0009DF17 /* CoreGraphics.framework */; };
 		82C850D5192A880F0009DF17 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82C850D4192A880F0009DF17 /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		825528FF192BBE9C00313D83 /* menuWithLevels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = menuWithLevels.h; sourceTree = "<group>"; };
+		82552900192BBE9C00313D83 /* menuWithLevels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = menuWithLevels.m; sourceTree = "<group>"; };
 		82C850CD192A880F0009DF17 /* xh_menuWithIndicator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = xh_menuWithIndicator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82C850D0192A880F0009DF17 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		82C850D2192A880F0009DF17 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,6 +125,8 @@
 				82C850E6192A880F0009DF17 /* ViewController.m */,
 				82C85105192A887A0009DF17 /* menuWithIndicator.h */,
 				82C85106192A887A0009DF17 /* menuWithIndicator.m */,
+				825528FF192BBE9C00313D83 /* menuWithLevels.h */,
+				82552900192BBE9C00313D83 /* menuWithLevels.m */,
 				82C850E8192A880F0009DF17 /* Images.xcassets */,
 				82C850D7192A880F0009DF17 /* Supporting Files */,
 			);
@@ -256,6 +261,7 @@
 			files = (
 				82C85107192A887A0009DF17 /* menuWithIndicator.m in Sources */,
 				82C850E7192A880F0009DF17 /* ViewController.m in Sources */,
+				82552901192BBE9C00313D83 /* menuWithLevels.m in Sources */,
 				82C850E1192A880F0009DF17 /* AppDelegate.m in Sources */,
 				82C850DD192A880F0009DF17 /* main.m in Sources */,
 			);
@@ -466,6 +472,7 @@
 				82C85101192A880F0009DF17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		82C85102192A880F0009DF17 /* Build configuration list for PBXNativeTarget "xh_menuWithIndicatorTests" */ = {
 			isa = XCConfigurationList;
@@ -474,6 +481,7 @@
 				82C85104192A880F0009DF17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
