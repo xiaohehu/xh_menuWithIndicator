@@ -36,8 +36,8 @@
 
 @protocol indicatorMenuDelegate <NSObject>
 
--(void) didSelectItemAtIndex:(NSInteger) selectedIndex;
+-(void) didSelectItemAtIndex:(NSInteger) selectedIndex inMenu:(menuWithIndicator *)indicatorMenu;
 @optional
--(void) didSelectItemAgain;
+-(void) didSelectItemAgainInMenu:(menuWithIndicator *)indicatorMenu;
 
 @end

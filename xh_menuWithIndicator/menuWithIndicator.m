@@ -75,6 +75,7 @@ static float buttonSpace = 20.0;
             CGSize stringsize = [titleString sizeWithFont:[UIFont systemFontOfSize:14]];
             UIButton *uib_menuItem = [UIButton buttonWithType:UIButtonTypeCustom];
             uib_menuItem.frame = CGRectMake((preSize.width + buttonSpace)*i, 0.0, stringsize.width, self.frame.size.height);
+            [uib_menuItem setTintColor:[UIColor blackColor]];
             uib_menuItem.tag = i;
             [uib_menuItem addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
             [_arr_buttons addObject:uib_menuItem];
@@ -86,22 +87,25 @@ static float buttonSpace = 20.0;
     UIButton *tmpButton = sender;
     if (_preBtnTag == tmpButton.tag) {
         //添加怎么处理按键显示
-        [self didSelectItemAgain];
+        if (self.arr_buttonTitles.count > 0) {
+            [tmpButton setTintColor:[UIColor redColor]];
+        }
+        [self didSelectItemAgainInMenu:self];
         _preBtnTag = -1;
     }
     else {
         //添加怎么处理按键显示
-        [self didSelectItemAtIndex:tmpButton.tag];
+        [self didSelectItemAtIndex:tmpButton.tag inMenu:self];
         _preBtnTag = (int)tmpButton.tag;
     }
 }
 
 #pragma mark- Delegate Method
--(void) didSelectItemAtIndex:(NSInteger) selectedIndex {
-    [self.delegate didSelectItemAtIndex:selectedIndex];
+-(void) didSelectItemAtIndex:(NSInteger) selectedIndex inMenu:(menuWithIndicator *)indicatorMenu{
+    [self.delegate didSelectItemAtIndex:selectedIndex inMenu:indicatorMenu];
 }
--(void) didSelectItemAgain {
-    [self.delegate didSelectItemAgain];
+-(void) didSelectItemAgainInMenu:(menuWithIndicator *)indicatorMenu {
+    [self.delegate didSelectItemAgainInMenu:indicatorMenu];
 }
 /*
 // Only override drawRect: if you perform custom drawing.
