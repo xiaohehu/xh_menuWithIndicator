@@ -122,8 +122,8 @@
     NSLog(@"\n\n Tapped Level%i and item %i", selectedLevel, selectedIndex);
 }
 
--(void) didSelectItemAgainAtLevel:(NSInteger) selectedLevel {
-    NSLog(@"\n\n Retapped button in level %i", selectedLevel);
+-(void) didSelectItemAgainAtLevel:(NSInteger) selectedLevel andIndex:(NSInteger) selectedIndex {
+    NSLog(@"\n\n Retapped button in level %i and item %i", selectedLevel, selectedIndex);
 }
 #pragma mark
 - (void)didReceiveMemoryWarning

@@ -156,7 +156,7 @@ static float buttonSpace = 20.0;
             [tmpBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             _uiv_mainNavIndicator.hidden = YES;
         }
-        [self didSelectItemAgainAtLevel:0  andIndex:tmpBtn.tag];
+        [self didSelectItemAgainAtLevel:0  andIndex:_preMainButton];
         _preMainButton = -1;
     }
     // Tap the button first time
