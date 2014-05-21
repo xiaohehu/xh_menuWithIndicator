@@ -13,6 +13,7 @@ static float buttonSpace = 20.0;
 @property (nonatomic)         int               numOfLevels;
 @property (nonatomic)         int               preMainButton;
 @property (nonatomic)         int               preSubButton;
+@property (nonatomic)         CGRect            originalRect;
 @property (nonatomic, strong) NSMutableArray    *arr_buttons;
 @property (nonatomic, strong) NSMutableArray    *arr_subButtons;
 @property (nonatomic, strong) UIView            *uiv_mainNavContainer;
@@ -29,6 +30,7 @@ static float buttonSpace = 20.0;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        _originalRect = frame;
         _preMainButton = -1;
         _preSubButton = -1;
         self.backgroundColor = [UIColor clearColor];
@@ -38,14 +40,8 @@ static float buttonSpace = 20.0;
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height*2);
         _arr_buttons = [[NSMutableArray alloc] init];
         _arr_subButtons = [[NSMutableArray alloc] init];
-        _uiv_mainNavContainer = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, frame.size.width, frame.size.height)];
+        _uiv_mainNavContainer = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, _originalRect.size.width,_originalRect.size.height)];
         _uiv_mainNavContainer.backgroundColor = [UIColor yellowColor];
-        //Make submenu below Main nav menu
-        CGRect mainFrame = self.bounds;
-        CGFloat yValue = mainFrame.size.height;
-        mainFrame.origin.y = yValue;
-        _uiv_subNavContainer = [[UIView alloc] initWithFrame:mainFrame];
-        _uiv_subNavIndicator.backgroundColor = [UIColor redColor];
     }
     return self;
 }
@@ -82,7 +78,7 @@ static float buttonSpace = 20.0;
             //Set Indicators
             if ([self.dataSource indicatorViews] != nil) {
                 _uiv_mainNavIndicator = [self.dataSource indicatorViews][0];
-                _uiv_subNavContainer = [self.dataSource indicatorViews][1];
+                _uiv_subNavIndicator = [self.dataSource indicatorViews][1];
                 _uiv_mainNavIndicator.hidden = YES;
                 _uiv_subNavContainer.hidden = YES;
             }
@@ -104,7 +100,7 @@ static float buttonSpace = 20.0;
             NSString *titleString = [arr_mainNavItems objectAtIndex:i];
             CGSize stringsize = [titleString sizeWithFont:[UIFont systemFontOfSize:20]];
             UIButton *uib_menuItem = [UIButton buttonWithType:UIButtonTypeCustom];
-            uib_menuItem.frame = CGRectMake((preSize.width + buttonSpace + preX), 0.0, stringsize.width, self.frame.size.height);
+            uib_menuItem.frame = CGRectMake((preSize.width + buttonSpace + preX), 0.0, stringsize.width, _originalRect.size.height);
             [uib_menuItem setTitle:titleString forState:UIControlStateNormal];
             [uib_menuItem setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             uib_menuItem.tag = i;
@@ -120,8 +116,11 @@ static float buttonSpace = 20.0;
 }
 
 -(void)initSubMenuItems:(int)index {
-    [self createSubMenuItems:[self.arr_buttonTitles objectAtIndex:index]];
+    _uiv_subNavContainer = [[UIView alloc] initWithFrame:CGRectMake(0.0, _originalRect.size.height, _originalRect.size.width, _originalRect.size.height)];
+    _uiv_subNavContainer.backgroundColor = [UIColor redColor];
     [_arr_subButtons removeAllObjects];
+    
+    [self createSubMenuItems:[self.arr_buttonTitles objectAtIndex:index]];
 }
 -(void)createSubMenuItems:(NSArray *)arr_subMenuItems {
     CGSize preSize = CGSizeZero;
@@ -130,7 +129,7 @@ static float buttonSpace = 20.0;
         NSString *titleString = [arr_subMenuItems objectAtIndex:i];
         CGSize stringsize = [titleString sizeWithFont:[UIFont systemFontOfSize:20]];
         UIButton *uib_menuItem = [UIButton buttonWithType:UIButtonTypeCustom];
-        uib_menuItem.frame = CGRectMake((preSize.width + buttonSpace + preX), 0.0, stringsize.width, self.frame.size.height);
+        uib_menuItem.frame = CGRectMake((preSize.width + buttonSpace + preX), 0.0, stringsize.width, _originalRect.size.height);
         [uib_menuItem setTitle:titleString forState:UIControlStateNormal];
         [uib_menuItem setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         uib_menuItem.tag = i;
@@ -147,14 +146,15 @@ static float buttonSpace = 20.0;
 #pragma mark Handle Button Tapped
 -(void)mainNavButtonTapped:(id)sender {
     UIButton *tmpBtn = sender;
-    
     [self addSubview:_uiv_mainNavIndicator];
+    [_uiv_subNavContainer removeFromSuperview];
+    [_uiv_subNavIndicator removeFromSuperview];
+    _uiv_subNavIndicator.hidden = YES;
     // Tap the button again
     if (_preMainButton == tmpBtn.tag) {
         if (self.arr_buttonTitles.count > 0) {
             [tmpBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             _uiv_mainNavIndicator.hidden = YES;
-            _uiv_subNavContainer.hidden = YES;
         }
         [self didSelectItemAgainAtLevel:0];
         _preMainButton = -1;
@@ -209,14 +209,14 @@ static float buttonSpace = 20.0;
 
 -(void)subNavButtonTapped:(id)sender {
     UIButton *tmpBtn = sender;
+    [_uiv_subNavContainer addSubview: _uiv_subNavIndicator];
     // Tap the button again
     if (_preSubButton == tmpBtn.tag) {
         if (self.arr_subButtons.count > 0) {
             [tmpBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//            _uiv_mainNavIndicator.hidden = YES;
-            _uiv_subNavContainer.hidden = YES;
+            _uiv_subNavIndicator.hidden = YES;
         }
-        [self didSelectItemAgainAtLevel:0];
+        [self didSelectItemAgainAtLevel:1];
         _preSubButton = -1;
     }
     // Tap the button first time
@@ -228,7 +228,8 @@ static float buttonSpace = 20.0;
             [tmpBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
             if (_uiv_subNavIndicator.hidden) {
                 _uiv_subNavIndicator.frame = CGRectMake(tmpBtn.frame.origin.x+(tmpBtn.frame.size.width - _uiv_subNavIndicator.frame.size.width)/2, 0.0, _uiv_subNavIndicator.frame.size.width, _uiv_subNavIndicator.frame.size.height);
-                _uiv_mainNavIndicator.hidden = NO;
+                _uiv_subNavIndicator.hidden = NO;
+                NSLog(@"The sub menu indicator is %@",[_uiv_subNavIndicator description]);
             }
             else {
                 [UIView animateWithDuration:0.6 animations:^{
@@ -246,7 +247,7 @@ static float buttonSpace = 20.0;
 
 #pragma mark- Button Tapped Delegate Methods
 -(void) didSelectItemAtLevel:(NSInteger) selectedLevel andInde:(NSInteger) selectedIndex{
-    [self.delegate didSelectItemAtLevel:selectedIndex andInde:selectedIndex];
+    [self.delegate didSelectItemAtLevel:selectedLevel andInde:selectedIndex];
 }
 
 -(void) didSelectItemAgainAtLevel:(NSInteger) selectedLevel {

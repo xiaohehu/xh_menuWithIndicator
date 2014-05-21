@@ -111,7 +111,7 @@
     uiv_mainIndicator.backgroundColor = [UIColor brownColor];
     
     UIView *uiv_subIndicator = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 20.0, 20.0)];
-    uiv_subIndicator.backgroundColor = [UIColor orangeColor];
+    uiv_subIndicator.backgroundColor = [UIColor blackColor];
     
     NSArray *arr_indicators = [[NSArray alloc] initWithObjects:uiv_mainIndicator, uiv_subIndicator, nil];
     
