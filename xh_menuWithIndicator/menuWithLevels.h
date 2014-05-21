@@ -36,7 +36,7 @@
 @end
 
 @protocol levelMenuDelegate <NSObject>
--(void) didSelectItemAtLevel:(NSInteger) selectedLevel andInde:(NSInteger) selectedIndex;
+-(void) didSelectItemAtLevel:(NSInteger) selectedLevel andIndex:(NSInteger) selectedIndex;
 @optional
--(void) didSelectItemAgainAtLevel:(NSInteger) selectedLevel;
+-(void) didSelectItemAgainAtLevel:(NSInteger) selectedLevel andIndex:(NSInteger) selectedIndex;
 @end

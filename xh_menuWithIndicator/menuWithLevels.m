@@ -156,7 +156,7 @@ static float buttonSpace = 20.0;
             [tmpBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             _uiv_mainNavIndicator.hidden = YES;
         }
-        [self didSelectItemAgainAtLevel:0];
+        [self didSelectItemAgainAtLevel:0  andIndex:tmpBtn.tag];
         _preMainButton = -1;
     }
     // Tap the button first time
@@ -202,7 +202,7 @@ static float buttonSpace = 20.0;
             default:
                 break;
         }
-        [self didSelectItemAtLevel:0 andInde:tmpBtn.tag];
+        [self didSelectItemAtLevel:0 andIndex:tmpBtn.tag];
         _preMainButton = (int)tmpBtn.tag;
     }
 }
@@ -216,7 +216,7 @@ static float buttonSpace = 20.0;
             [tmpBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             _uiv_subNavIndicator.hidden = YES;
         }
-        [self didSelectItemAgainAtLevel:1];
+        [self didSelectItemAgainAtLevel:1  andIndex:tmpBtn.tag];
         _preSubButton = -1;
     }
     // Tap the button first time
@@ -238,7 +238,7 @@ static float buttonSpace = 20.0;
             }
             
         }
-        [self didSelectItemAtLevel:1 andInde:tmpBtn.tag];
+        [self didSelectItemAtLevel:1 andIndex:tmpBtn.tag];
         _preSubButton = (int)tmpBtn.tag;
     }
 
@@ -246,12 +246,12 @@ static float buttonSpace = 20.0;
 }
 
 #pragma mark- Button Tapped Delegate Methods
--(void) didSelectItemAtLevel:(NSInteger) selectedLevel andInde:(NSInteger) selectedIndex{
-    [self.delegate didSelectItemAtLevel:selectedLevel andInde:selectedIndex];
+-(void) didSelectItemAtLevel:(NSInteger) selectedLevel andIndex:(NSInteger) selectedIndex{
+    [self.delegate didSelectItemAtLevel:selectedLevel andIndex:selectedIndex];
 }
 
--(void) didSelectItemAgainAtLevel:(NSInteger) selectedLevel {
-    [self.delegate didSelectItemAgainAtLevel:selectedLevel];
+-(void) didSelectItemAgainAtLevel:(NSInteger) selectedLevel  andIndex:(NSInteger) selectedIndex{
+    [self.delegate didSelectItemAgainAtLevel: selectedLevel  andIndex: selectedIndex];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

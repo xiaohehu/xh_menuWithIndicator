@@ -118,7 +118,7 @@
     return arr_indicators;
 }
 
--(void) didSelectItemAtLevel:(NSInteger) selectedLevel andInde:(NSInteger) selectedIndex {
+-(void) didSelectItemAtLevel:(NSInteger) selectedLevel andIndex:(NSInteger) selectedIndex {
     NSLog(@"\n\n Tapped Level%i and item %i", selectedLevel, selectedIndex);
 }
 
