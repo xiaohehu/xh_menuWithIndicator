@@ -64,19 +64,19 @@ static float buttonSpace = 20.0;
     else {
         if (self.dataSource != nil) {
             //Add Button Titles
-            if ([self.dataSource buttonTitleOfMenuItem] != nil) {
+            if ([self.dataSource respondsToSelector:@selector(buttonTitleOfMenuItem)]) {
                 [self.arr_buttonTitles setArray:[self.dataSource buttonTitleOfMenuItem]];
             }
             //Add Button Images
-            if ([self.dataSource buttonImageOfMenuItem] != nil) {
+            if ([self.dataSource respondsToSelector:@selector(buttonImageOfMenuItem)]) {
                 [self.arr_buttonImages setArray:[self.dataSource buttonImageOfMenuItem]];
             }
             //Add Button Selected Images
-            if ([self.dataSource buttonSelectedImage] != nil) {
+            if ([self.dataSource respondsToSelector:@selector(buttonSelectedImage)]) {
                 [self.arr_buttonSelectImage setArray:[self.dataSource buttonSelectedImage]];
             }
             //Set Indicators
-            if ([self.dataSource indicatorViews] != nil) {
+            if ([self.dataSource respondsToSelector:@selector(indicatorViews)]) {
                 _uiv_mainNavIndicator = [self.dataSource indicatorViews][0];
                 _uiv_subNavIndicator = [self.dataSource indicatorViews][1];
                 _uiv_mainNavIndicator.hidden = YES;

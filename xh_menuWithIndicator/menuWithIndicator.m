@@ -67,21 +67,21 @@ static float buttonSpace = 20.0;
         NSInteger count = [self.dataSource numberOfMenuItems];
         
         //Add button Title
-        if ([self.dataSource titleOfButtonsAtIndex:0] != nil) {
+        if ([self.dataSource respondsToSelector:@selector(titleOfButtonsAtIndex:)]) {
             for (int i = 0; i < count; i++) {
                 NSString *buttonTitle = [self.dataSource titleOfButtonsAtIndex:i];
                 [self.arr_buttonTitles addObject:buttonTitle];
             }
         }
         //Add Button Background Image
-        if ([self.dataSource imageOfButtonsAtIndex:0] != nil) {
+        if ([self.dataSource respondsToSelector:@selector(imageOfButtonsAtIndex:)]) {
             for (int j = 0; j < count; j++) {
                 UIImage *buttonBgImg = [self.dataSource imageOfButtonsAtIndex:j];
                 [self.arr_buttonImages addObject:buttonBgImg];
             }
         }
         //Add Selected Button's Background Image
-        if ([self.dataSource imageOfSelectedButtonAtIndex:0] != nil) {
+        if ([self.dataSource respondsToSelector:@selector(imageOfSelectedButtonAtIndex:)]) {
             for (int k = 0; k < count; k++) {
                 UIImage *selectedBtnImg = [self.dataSource imageOfSelectedButtonAtIndex:k];
                 [self.arr_buttonSelectImage addObject:selectedBtnImg];
